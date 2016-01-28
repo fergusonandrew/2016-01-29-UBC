@@ -1,0 +1,11 @@
+####INTRO####
+1. don't use a mirrored display, use an extended display. keep your notes on one screen and the what the students are going to see on the other.
+
+2. get the students to open a terminal window. make sure they have unzipped the tutorial file onto their desktop
+
+3. No Nelle Nemo intro. Just tell the students we are working with Nelle Nemo's data. She's a marine biologist. That's all you need to know.
+
+###########################
+####FILES & DIRECTORIES####
+###########################
+

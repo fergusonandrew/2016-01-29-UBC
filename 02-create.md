@@ -11,65 +11,60 @@ minutes: 15
 > *   Display the contents of a directory using the command line.
 > *   Delete specified files and/or directories.
 
-We now know how to explore files and directories,
-but how do we create them in the first place?
-Let's go back to Nelle's home directory,
-`/Users/nelle`,
+We now know how to explore files and directories, and about tab completion, which makes exploring easier,
+but we need to learn how to create these things in the first place.
+
+Let's go back into the data_shell directory,
 and use `ls -F` to see what it contains:
 
-~~~ {.bash}
-$ pwd
-~~~
-~~~ {.output}
-/Users/nelle
-~~~
-~~~ {.bash}
-$ ls -F
-~~~
-~~~ {.output}
-creatures/  molecules/           pizza.cfg
-data/       north-pacific-gyre/  solar.pdf
-Desktop/    notes.txt            writing/
-~~~
+> ~~~ 
+> /Users/nelle
+> ~~~
+
+> ~~~ 
+> $ ls -F
+> ~~~
+
+> ~~~ 
+> creatures/  molecules/           pizza.cfg
+> data/       north-pacific-gyre/  solar.pdf
+> Desktop/    notes.txt            writing/
+> ~~~
 
 Let's create a new directory called `thesis` using the command `mkdir thesis`
 (which has no output):
 
-~~~ {.bash}
-$ mkdir thesis
-~~~
+> ~~~
+> $ mkdir thesis
+> ~~~
 
-As you might (or might not) guess from its name,
+As you might guess from its name,
 `mkdir` means "make directory".
 Since `thesis` is a relative path
 (i.e., doesn't have a leading slash),
 the new directory is created in the current working directory:
 
-~~~ {.bash}
-$ ls -F
-~~~
-~~~ {.output}
-creatures/  north-pacific-gyre/  thesis/
-data/       notes.txt            writing/
-Desktop/    pizza.cfg
-molecules/  solar.pdf
-~~~
+> ~~~ 
+> $ ls -F 
+> ~~~
+> ~~~
+> creatures/  north-pacific-gyre/  thesis/
+> data/       notes.txt            writing/
+> Desktop/    pizza.cfg
+> molecules/  solar.pdf
+> ~~~
 
-However, there's nothing in it yet:
-
-~~~ {.bash}
-$ ls -F thesis
-~~~
+However, there's nothing in it yet.
 
 Let's change our working directory to `thesis` using `cd`,
 then run a text editor called Nano to create a file called `draft.txt`:
 
-~~~ {.bash}
-$ cd thesis
-$ nano draft.txt
-~~~
+> ~~~ 
+> $ cd thesis
+> $ nano draft.txt
+> ~~~
 
-> ## Which Editor? {.callout}
+> ## Which Editor? 
 >
 > When we say, "`nano` is a text editor," we really do mean "text": it can
 > only work with plain character data, not tables, images, or any other
@@ -77,8 +72,7 @@ $ nano draft.txt
 > drive it anywhere without training, but please use something more
 > powerful for real work. On Unix systems (such as Linux and Mac OS X),
 > many programmers use [Emacs](http://www.gnu.org/software/emacs/) or
-> [Vim](http://www.vim.org/) (both of which are completely unintuitive,
-> even by Unix standards), or a graphical editor such as
+> [Vim](http://www.vim.org/), or a graphical editor such as
 > [Gedit](http://projects.gnome.org/gedit/). On Windows, you may wish to
 > use [Notepad++](http://notepad-plus-plus.org/).
 >
@@ -91,39 +85,40 @@ $ nano draft.txt
 
 
 Let's type in a few lines of text,
-then use Control-O to write our data to disk:
+then use Control-O to write our data to disk. Check out the bottom of your terminal night now. All the commands that you need to use frequently are detailed there:
 
 ![Nano in action](fig/nano-screenshot.png)
 
+The carat symbol means that the control key is held down durin the command.
+
 Once our file is saved,
 we can use Control-X to quit the editor and return to the shell.
-(Unix documentation often uses the shorthand `^A` to mean "control-A".)
 `nano` doesn't leave any output on the screen after it exits,
 but `ls` now shows that we have created a file called `draft.txt`:
 
-~~~ {.bash}
-$ ls
-~~~
-~~~ {.output}
-draft.txt
-~~~
+> ~~~ 
+> $ ls
+> ~~~
+> ~~~ 
+> draft.txt
+> ~~~
 
 Let's tidy up by running `rm draft.txt`:
 
-~~~ {.bash}
-$ rm draft.txt
-~~~
+> ~~~ 
+> $ rm draft.txt
+> ~~~
 
 This command removes files ("rm" is short for "remove").
 If we run `ls` again,
 its output is empty once more,
 which tells us that our file is gone:
 
-~~~ {.bash}
-$ ls
-~~~
+> ~~~ 
+> $ ls
+> ~~~
 
-> ## Deleting Is Forever {.callout}
+> ## Deleting Is Forever 
 >
 > The Unix shell doesn't have a trash bin that we can recover deleted
 > files from (though most graphical interfaces to Unix do).  Instead,
@@ -136,32 +131,25 @@ $ ls
 Let's re-create that file
 and then move up one directory to `/Users/nelle` using `cd ..`:
 
-~~~ {.bash}
-$ pwd
-~~~
-~~~ {.output}
-/Users/nelle/thesis
-~~~
-~~~ {.bash}
-$ nano draft.txt
-$ ls
-~~~
-~~~ {.output}
-draft.txt
-~~~
-~~~ {.bash}
-$ cd ..
-~~~
+> ~~~ 
+> $ pwd
+> ~~~
+
+> ~~~ 
+> $ nano draft.txt
+> $ ls
+> ~~~
+
+> ~~~ 
+> $ cd ..
+> ~~~
 
 If we try to remove the entire `thesis` directory using `rm thesis`,
-we get an error message:
+we will get an error message:
 
-~~~ {.bash}
-$ rm thesis
-~~~
-~~~ {.error}
-rm: cannot remove `thesis': Is a directory
-~~~
+> ~~~ 
+> $ rm thesis
+> ~~~
 
 This happens because `rm` only works on files, not directories.
 The right command is `rmdir`,
@@ -169,28 +157,27 @@ which is short for "remove directory".
 It doesn't work yet either, though,
 because the directory we're trying to remove isn't empty:
 
-~~~ {.bash}
-$ rmdir thesis
-~~~
-~~~ {.error}
-rmdir: failed to remove `thesis': Directory not empty
-~~~
+> ~~~ 
+> $ rmdir thesis
+> ~~~
 
 This little safety feature can save you a lot of grief,
 particularly if you are a bad typist.
 To really get rid of `thesis` we must first delete the file `draft.txt`:
 
-~~~ {.bash}
-$ rm thesis/draft.txt
-~~~
+> ~~~
+> $ rm thesis/draft.txt
+> ~~~
 
 The directory is now empty, so `rmdir` can delete it:
 
-~~~ {.bash}
-$ rmdir thesis
-~~~
+> ~~~ 
+> $ rmdir thesis
+> ~~~
 
-> ## With Great Power Comes Great Responsibility {.callout}
+NEXT: 
+
+> ## IN UNIX, With Great Power Comes Great Responsibility 
 >
 > Removing the files in a directory just so that we can remove the
 > directory quickly becomes tedious. Instead, we can use `rm` with the
@@ -207,30 +194,30 @@ $ rmdir thesis
 
 Let's create that directory and file one more time.
 (Note that this time we're running `nano` with the path `thesis/draft.txt`,
-rather than going into the `thesis` directory and running `nano` on `draft.txt` there.)
+rather than going into the `thesis` directory and running `nano` on `draft.txt` there.) This is another example of using the path to a file with a command other than ls.
 
-~~~ {.bash}
-$ pwd
-~~~
-~~~ {.output}
-/Users/nelle
-~~~
-~~~ {.bash}
-$ mkdir thesis
-~~~
-~~~ {.bash}
-$ nano thesis/draft.txt
-$ ls thesis
-~~~
-~~~ {.output}
-draft.txt
-~~~
+> ~~~ 
+> $ pwd
+> ~~~
+> ~~~ 
+> /Users/nelle
+> ~~~
+> ~~~ 
+> $ mkdir thesis
+> ~~~
+> ~~~ 
+> $ nano thesis/draft.txt
+> $ ls thesis
+> ~~~
+> ~~~ 
+> draft.txt
+> ~~~
 
 `draft.txt` isn't a particularly informative name,
 so let's change the file's name using `mv`,
 which is short for "move":
 
-~~~ {.bash}
+~~~ 
 $ mv thesis/draft.txt thesis/quotes.txt
 ~~~
 
@@ -238,53 +225,51 @@ The first parameter tells `mv` what we're "moving",
 while the second is where it's to go.
 In this case,
 we're moving `thesis/draft.txt` to `thesis/quotes.txt`,
-which has the same effect as renaming the file.
-Sure enough,
-`ls` shows us that `thesis` now contains one file called `quotes.txt`:
+which has the same effect as renaming the file (and in fact, there is no "rename" command in the shell. only mv.).
+`ls` now shows us that `thesis` contains one file called `quotes.txt`:
 
-~~~ {.bash}
+~~~ 
 $ ls thesis
 ~~~
-~~~ {.output}
+~~~ 
 quotes.txt
 ~~~
 
-One has to be careful when specifying the target file name, since `mv` will 
+We need to be careful when specifying the target file name, since `mv` will 
 silently overwrite any existing file with the same name, which could 
 lead to data loss. An additional flag, `mv -i` (or `mv --interactive`),
 can be used to make `mv` ask the user for confirmation before overwriting. 
 
-Just for the sake of inconsistency,
 `mv` also works on directories --- there is no separate `mvdir` command.
 
-Let's move `quotes.txt` into the current working directory.
+So, let's move `quotes.txt` into the current working directory.
 We use `mv` once again,
 but this time we'll just use the name of a directory as the second parameter
 to tell `mv` that we want to keep the filename,
 but put the file somewhere new.
-(This is why the command is called "move".)
-In this case,
-the directory name we use is the special directory name `.` that we mentioned earlier.
 
-~~~ {.bash}
+In this case,
+the directory name we use is the special directory name `.` that we learned about earlier.
+
+~~~ 
 $ mv thesis/quotes.txt .
 ~~~
 
 The effect is to move the file from the directory it was in to the current working directory.
 `ls` now shows us that `thesis` is empty:
 
-~~~ {.bash}
+~~~ 
 $ ls thesis
 ~~~
 
 Further,
-`ls` with a filename or directory name as a parameter only lists that file or directory.
+an `ls` command with a filename or directory as a parameter only lists that file or directory.
 We can use this to see that `quotes.txt` is still in our current directory:
 
-~~~ {.bash}
+~~~ 
 $ ls quotes.txt
 ~~~
-~~~ {.output}
+~~~ 
 quotes.txt
 ~~~
 
@@ -294,11 +279,11 @@ We can check that it did the right thing using `ls`
 with two paths as parameters --- like most Unix commands,
 `ls` can be given thousands of paths at once:
 
-~~~ {.bash}
+~~~ 
 $ cp quotes.txt thesis/quotations.txt
 $ ls quotes.txt thesis/quotations.txt
 ~~~
-~~~ {.output}
+~~~ 
 quotes.txt   thesis/quotations.txt
 ~~~
 
@@ -306,23 +291,22 @@ To prove that we made a copy,
 let's delete the `quotes.txt` file in the current directory
 and then run that same `ls` again.
 
-~~~ {.bash}
+~~~ 
 $ rm quotes.txt
 $ ls quotes.txt thesis/quotations.txt
 ~~~
-~~~ {.error}
+~~~
 ls: cannot access quotes.txt: No such file or directory
 thesis/quotations.txt
 ~~~
 This time it tells us that it can't find `quotes.txt` in the current directory,
 but it does find the copy in `thesis` that we didn't delete.
 
-> ## What's In A Name? {.callout}
+> ## What's In A Name? 
 >
-> You may have noticed that all of Nelle's files' names are "something dot
+> I'm guessing most of you know this already, so bear with me if you do. You may have noticed that all of Nelle's files' names are "something dot
 > something", and in this part of the lesson, we always used the extension 
-> `.txt`.  This is just a convention: we can call a file `mythesis` or
-> almost anything else we want. However, most people use two-part names
+> `.txt`.  Most people use two-part names
 > most of the time to help them (and their programs) tell different kinds
 > of files apart. The second part of such a name is called the
 > **filename extension**, and indicates
@@ -334,10 +318,10 @@ but it does find the copy in `thesis` that we didn't delete.
 > bytes: it's up to us and our programs to interpret those bytes
 > according to the rules for PDF documents, images, and so on.
 >
-> Naming a PNG image of a whale as `whale.mp3` doesn't somehow
-> magically turn it into a recording of whalesong, though it *might*
-> cause the operating system to try to open it with a music player
-> when someone double-clicks it.
+> Changing a file's extension won't
+> magically turn it into a new file type, but it will definitely
+> cause the operating system to try to open it with a different program
+> if someone double-clicks it.
 
 > ## Renaming files {.challenge}
 >
